@@ -1,0 +1,86 @@
+﻿@model Profile
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container">
+    <h1 class="text-center my-4">Welcome, @Model.Member.UserName</h1>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4 text-center">
+            <!-- Form for uploading the profile picture -->
+            <form asp-action="UpdateProfilePic" asp-controller="Profile" method="post" enctype="multipart/form-data">
+                @if (Model.ProfilePic != null)
+                {
+                    <label for="ProfilePicInput">
+                        <img src="@Url.Action("GetImage", "Profile", new { id = Model.MemberId })" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 200px; height: 200px; cursor: pointer;" />
+                    </label>
+                }
+                else
+                {
+                    <label for="ProfilePicInput">
+                        <img src="~/images/default.jpg" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 200px; height: 200px; cursor: pointer;" />
+                    </label>
+                }
+
+                <!-- Hidden file input for selecting a new profile picture -->
+                <input type="file" id="ProfilePicInput" name="ProfilePic" style="display:none;" onchange="this.form.submit();" />
+            </form>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Section for displaying the borrowed books -->
+    <h3>Your Borrowed Books</h3>
+
+    @if (Model.BorrowedBooks.Any(b => b.status == 1))
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var bookCheckedOut in Model.BorrowedBooks.Where(b => b.status == 1))
+                    {
+                        <tr>
+                            <td>@bookCheckedOut.Book.Title</td>
+                            <td>@bookCheckedOut.BorrowDate.ToString("yyyy-MM-dd")</td>
+                            <td>@bookCheckedOut.DueDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <!-- Return button -->
+                                <a href="/Return/MakeReturn/@bookCheckedOut.Id" class="btn btn-sm btn-warning">Return</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">No books are currently checked out.</div>
+    }
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .rounded-circle {
+        border: 3px solid #007bff; /* Blue border for profile picture */
+    }
+</style>

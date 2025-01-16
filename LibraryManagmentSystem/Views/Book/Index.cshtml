@@ -1,0 +1,51 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1 class="text-center my-4">Available Books</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                <div class="card shadow-sm h-100" style="width: 100%;">
+                    <img src="@Url.Action("GetImage", "Book", new { id = book.Id })" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text">Available Quantity: <strong>@book.quantity</strong></p>
+
+                        <div class="mt-auto">
+                            @if (User.IsInRole("Librarian"))
+                            {
+                                <a href="/Book/UpdateBook/@book.Id" class="btn btn-warning btn-sm me-2">Edit</a>
+                                <a href="/Book/DeleteBook/@book.Id" class="btn btn-danger btn-sm">Delete</a>
+                            }
+                            else if (User.IsInRole("Member"))
+                            {
+                                <a href="/Booking/MakeCheckOut/@book.Id" class="btn btn-success btn-sm">Borrow</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+</style>

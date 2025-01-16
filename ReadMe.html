@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="library-management-system---asp.net-core-mvc"><strong>Library Management System - <a href="http://ASP.NET">ASP.NET</a> Core MVC</strong></h1>
+<h2 id="table-of-contents"><strong>Table of Contents</strong></h2>
+<ol>
+<li><a href="#project-overview">Project Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#technologies-used">Technologies Used</a></li>
+<li><a href="#setup-and-installation">Setup and Installation</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#authentication-and-roles">Authentication and Roles</a></li>
+<li><a href="#future-improvements">Future Improvements</a></li>
+</ol>
+<hr>
+<h2 id="project-overview"><strong>Project Overview</strong></h2>
+<p>The <strong>Library Management System</strong> is a web application built using <a href="http://ASP.NET">ASP.NET</a> Core MVC to manage book checkouts, returns, member management, and penalties for late returns. It is designed for both librarians and members, providing role-based access control.</p>
+<hr>
+<h2 id="team-members"><strong>Team Members</strong></h2>
+<ol>
+<li><strong>George Medhat Makram Wessa</strong></li>
+<li><strong>Abdelrahman Ahmed Abdelrahman</strong></li>
+<li><strong>Ahmed Ibrahim Mohamed Ibrahim</strong></li>
+<li><strong>Bishoy Maged Makram Wessa</strong></li>
+<li><strong>Karin Kheir Abdallah</strong></li>
+<li><strong>Youssef Sameh Mohamed</strong></li>
+</ol>
+<hr>
+<h2 id="features"><strong>Features</strong></h2>
+<ul>
+<li><strong>Book Management</strong>: Add, edit, delete, and view books in the library.</li>
+<li><strong>Member Management</strong>: Register, view, and manage members.</li>
+<li><strong>Checkout and Return</strong>: Handle the checkout and return of books, with due date tracking.</li>
+<li><strong>Penalty System</strong>: Automatically calculate penalties for overdue returns.</li>
+<li><strong>Search</strong>: Search and filter books by title, author, or genre.</li>
+<li><strong>User Authentication</strong>: Role-based access for librarians and members.</li>
+</ul>
+<hr>
+<h2 id="technologies-used"><strong>Technologies Used</strong></h2>
+<ul>
+<li><strong><a href="http://ASP.NET">ASP.NET</a> Core MVC</strong>: Backend framework for building the application.</li>
+<li><strong>Entity Framework Core</strong>: ORM for database management and migrations.</li>
+<li><strong>SQL Server</strong>: Database to store book, member, and transaction data.</li>
+<li><strong>Identity Server</strong>: Used for user authentication and role-based access.</li>
+<li><strong>Bootstrap</strong>: For responsive UI design.</li>
+<li><strong>C#</strong>: Main programming language.</li>
+</ul>
+<hr>
+<h2 id="setup-and-installation"><strong>Setup and Installation</strong></h2>
+<h3 id="option-1-using-the-provided-rar-file"><strong>Option 1: Using the Provided RAR File</strong></h3>
+<ul>
+<li>Download the project as a <code>.rar</code> file (provided separately).</li>
+<li>Extract the <code>.rar</code> file to your preferred directory.</li>
+<li>Open the project in Visual Studio (or your preferred IDE).</li>
+</ul>
+<h3 id="option-2-cloning-from-repository-link-will-be-provided-later"><strong>Option 2: Cloning from Repository (Link will be provided later)</strong></h3>
+<ul>
+<li>The link to the repository will be shared once available.</li>
+</ul>
+<h3 id="prerequisites"><strong>Prerequisites</strong></h3>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download/dotnet/6.0">.NET 6 SDK</a> or later</li>
+<li><a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL Server</a></li>
+<li><a href="https://visualstudio.microsoft.com/">Visual Studio</a> or any IDE supporting .NET</li>
+</ul>
+<h3 id="installation-steps"><strong>Installation Steps</strong></h3>
+<ol>
+<li>
+<p><strong>Open the Project</strong>:</p>
+<ul>
+<li>Extract the provided <code>.rar</code> file and open the solution in Visual Studio.</li>
+</ul>
+</li>
+<li>
+<p><strong>Set Up the Database</strong>:</p>
+<ul>
+<li>In <code>appsettings.json</code>, configure the connection string to match your SQL Server instance:<pre class=" language-json"><code class="prism  language-json"><span class="token string">"ConnectionStrings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"DefaultConnection"</span><span class="token punctuation">:</span> <span class="token string">"Server=your_server_name;Database=LibraryDB;Trusted_Connection=True;MultipleActiveResultSets=true"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Run Migrations</strong>:</p>
+<ul>
+<li>Open the Package Manager Console in Visual Studio and run:<pre class=" language-bash"><code class="prism  language-bash">update-database
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Run the Application</strong>:</p>
+<ul>
+<li>Press <code>F5</code> or use the following command to run the application:<pre class=" language-bash"><code class="prism  language-bash">dotnet run
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="project-structure"><strong>Project Structure</strong></h2>
+<h3 id="folders-and-files"><strong>Folders and Files</strong></h3>
+<ul>
+<li><strong>/Controllers</strong>: Contains all controllers for managing requests (e.g., <code>BookController.cs</code>, <code>MemberController.cs</code>).</li>
+<li><strong>/Models</strong>: Contains all data models (e.g., <code>Book.cs</code>, <code>Member.cs</code>, <code>Checkout.cs</code>, <code>Penalty.cs</code>).</li>
+<li><strong>/Views</strong>: Contains all Razor views for rendering the UI (e.g., <code>Views/Book/Index.cshtml</code>).</li>
+<li><strong>/Repositories</strong>: Data access layer that interacts with the database.</li>
+<li><strong>/Migrations</strong>: Entity Framework Core migrations to manage the database schema.</li>
+</ul>
+<h3 id="key-files"><strong>Key Files</strong></h3>
+<ul>
+<li><strong>appsettings.json</strong>: Configuration file for connection strings and app settings.</li>
+<li><strong>Startup.cs</strong>: Configures services and the request pipeline.</li>
+<li><strong>Program.cs</strong>: Main entry point of the application.</li>
+</ul>
+<hr>
+<h2 id="usage"><strong>Usage</strong></h2>
+<h3 id="accessing-the-application"><strong>Accessing the Application</strong></h3>
+<p>Once the application is running, you can access it via the browser:</p>
+<ul>
+<li><strong>Librarian Role</strong>: Has full access to manage books, members, checkouts, and penalties.</li>
+<li><strong>Member Role</strong>: Can view books, their borrowing history, and penalties.</li>
+</ul>
+<h3 id="key-features"><strong>Key Features</strong></h3>
+<ol>
+<li>
+<p><strong>Manage Books</strong>:</p>
+<ul>
+<li>Go to <code>/Books</code> to view the list of books.</li>
+<li>Add a new book by clicking the <strong>Add Book</strong> button.</li>
+<li>Edit or delete a book by selecting the respective options.</li>
+</ul>
+</li>
+<li>
+<p><strong>Manage Members</strong>:</p>
+<ul>
+<li>Go to <code>/Members</code> to view the list of members.</li>
+<li>Add a new member, view their borrowing history, or edit their details.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checkout Books</strong>:</p>
+<ul>
+<li>Go to <code>/Checkouts</code> to manage book checkouts.</li>
+<li>Select a book and member to complete the checkout process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Books</strong>:</p>
+<ul>
+<li>Go to <code>/Returns</code> to record book returns and calculate penalties if overdue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Search</strong>:</p>
+<ul>
+<li>Use the search bar on the <strong>Books</strong> page to find books by title, author, or genre.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="authentication-and-roles"><strong>Authentication and Roles</strong></h2>
+<ul>
+<li><strong>Librarian Role</strong>: Librarians have administrative privileges to manage books, members, checkouts, returns, and penalties.</li>
+<li><strong>Member Role</strong>: Members can only view available books, their borrowing history, and penalties.</li>
+</ul>
+<p>You can create new users through the registration page, with role assignments managed by the administrator.</p>
+<hr>
+<h2 id="future-improvements"><strong>Future Improvements</strong></h2>
+<ul>
+<li><strong>Notifications</strong>: Add email or SMS notifications for overdue books or upcoming due dates.</li>
+<li><strong>Advanced Search</strong>: Add more search filters, such as by publication year or book category.</li>
+<li><strong>Analytics</strong>: Include reporting features to track borrowing trends, popular books, etc.</li>
+<li><strong>UI Enhancements</strong>: Improve UI/UX for better navigation and user experience.</li>
+</ul>
+<hr>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>This documentation provides an overview of the <strong>Library Management System</strong>, outlining the key features, setup instructions, and structure of the project. Use the provided <code>.rar</code> file to access the project files and follow the setup instructions to get started.</p>
+</div>
+</body>
+
+</html>

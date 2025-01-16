@@ -1,0 +1,34 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add a New Book</h2>
+
+    <form asp-action="AddBook" asp-controller="Book" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Title">Title</label>
+            <input asp-for="Title" class="form-control" placeholder="Enter the book title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Quantity">Quantity</label>
+            <input asp-for="Quantity" type="number" class="form-control" placeholder="Enter the quantity" min="1" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Img">Upload Image</label>
+            <input asp-for="Img" type="file" class="form-control mb-3" />
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Book</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

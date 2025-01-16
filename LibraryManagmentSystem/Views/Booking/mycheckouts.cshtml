@@ -1,0 +1,84 @@
+﻿@model List<CheckOut>
+
+@{
+    ViewData["Title"] = "My CheckOuts";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Checkouts</h2>
+
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var checkout in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Checkout ID: @checkout.Id</h5>
+                            <h6>
+                                Status:
+                                @switch (checkout.status)
+                                {
+                                    case 0:
+                                        <span class="badge bg-secondary">Not Sent</span>
+                                        ; break;
+                                    case 1:
+                                        <span class="badge bg-info">Sent</span>
+                                        ; break;
+                                    case 2:
+                                        <span class="badge bg-success">Accepted</span>
+                                        ; break;
+                                    case 3:
+                                        <span class="badge bg-danger">Rejected</span>
+                                        ; break;
+                                    default:
+                                        <span class="badge bg-warning">Unknown</span>
+                                        ; break;
+                                }
+                            </h6>
+
+                            <div class="mt-3">
+                                <h6>Books in this Checkout:</h6>
+                                <div class="row">
+                                    @foreach (var book in checkout.booksCheckedOuts)
+                                    {
+                                        <div class="col-4">
+                                            <div class="card mb-2">
+                                                <img src="@Url.Action("GetImage", "Book", new { id = book.Book.Id })" class="card-img-top" style="height: 150px; object-fit: cover;" />
+                                                <div class="card-body p-2">
+                                                    <p class="card-text text-center">@book.Book.Title</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Buttons for Confirm and Delete based on status -->
+                            <div class="mt-3">
+                                @if (checkout.status == 0)
+                                {
+                                    <!-- Show both Confirm and Delete buttons if status is 0 -->
+                                    <a href="/Booking/ConfirmCheckOut/@checkout.Id" class="btn btn-success">Confirm</a>
+                                    <a href ="/Booking/CancelCheckOut/@checkout.Id" class="btn btn-danger">Cancel</a>
+                                }
+                                else if (checkout.status == 1)
+                                {
+                                    <!-- Show only Delete button if status is 1 -->
+                                    <a href="/Booking/CancelCheckOut/@checkout.Id" class="btn btn-danger">Cancel</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <p>No checkouts found.</p>
+        </div>
+    }
+</div>

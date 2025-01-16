@@ -1,0 +1,59 @@
+﻿@model LibraryManagmentSystem.ViewModels.RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Librarian Register";
+}
+
+<div class="container">
+    <h1 class="text-center my-4">Register</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Create Your Account</h4>
+                    <hr />
+                    <form asp-action="SaveRegister">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="UserName" class="form-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" type="password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ComfirmPassword" class="form-label"></label>
+                            <input asp-for="ComfirmPassword" class="form-control" type="password" />
+                            <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .card {
+        border-radius: 10px;
+    }
+</style>

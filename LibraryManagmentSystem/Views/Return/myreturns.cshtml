@@ -1,0 +1,92 @@
+﻿@model List<Return>
+
+@{
+    ViewData["Title"] = "My Returns";
+}
+
+<div class="container">
+    <h1 class="text-center my-4">My Returns</h1>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Return ID</th>
+                    <th>Books</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var returnItem in Model)
+                {
+                    <tr>
+                        <td>@returnItem.Id</td>
+                        <td>
+                            <!-- Display all books associated with this return -->
+                            @foreach (var book in returnItem.ReturnedBooks)
+                            {
+                                <p>@book.Book.Title</p>
+                            }
+                        </td>
+                        <td>
+                            @switch (returnItem.status)
+                            {
+                                case 0:
+                                    <span class="text-warning">Not Sent</span>
+                                    break;
+                                case 1:
+                                    <span class="text-info">Sent</span>
+                                    break;
+                                case 2:
+                                    <span class="text-success">Returned</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            @if (returnItem.status == 0)
+                            {
+                                <!-- Buttons for Not Sent (status 0) -->
+                                <a href="/Return/ConfirmReturn/@returnItem.Id" class="btn btn-success">Confirm</a>
+                                <a href="/Return/CancelReturn/@returnItem.Id" class="btn btn-danger">Cancel</a>
+                            }
+                            else if (returnItem.status == 1)
+                            {
+                                <!-- Button for Sent (status 1) -->
+                                <a href="/Return/CancelReturn/@returnItem.Id" class="btn btn-danger">Cancel</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .text-warning {
+        font-weight: bold;
+        color: #ffc107; /* Customize as needed */
+    }
+
+    .text-info {
+        font-weight: bold;
+        color: #17a2b8; /* Customize as needed */
+    }
+
+    .text-success {
+        font-weight: bold;
+        color: #28a745; /* Customize as needed */
+    }
+
+</style>

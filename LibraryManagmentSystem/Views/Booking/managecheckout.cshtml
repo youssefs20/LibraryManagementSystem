@@ -1,0 +1,54 @@
+﻿@model CheckOut
+
+@{
+    ViewData["Title"] = "Manage Checkout Request";
+}
+
+<div class="container mt-5">
+    <h2>Manage Checkout Request - Checkout ID: @Model.Id</h2>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Member: @Model.Member.UserName</h5>
+            <img src="@Url.Action("GetImage", "Profile", new { id = Model.MemberId })" class="img-thumbnail" style="width: 150px; height: 150px;" />
+            <h6>
+                Status:
+                @switch (Model.status)
+                {
+                    case 1:
+                        <span class="badge bg-info">Sent</span>
+                        ; break;
+                    case 2:
+                        <span class="badge bg-success">Accepted</span>
+                        ; break;
+                    case 3:
+                        <span class="badge bg-danger">Rejected</span>
+                        ; break;
+                }
+            </h6>
+
+            <h6 class="mt-3">Books:</h6>
+            <form asp-action="ManageCheckout" method="post">
+                <input type="hidden" name="CheckOutId" value="@Model.Id" />
+                <div class="row">
+                    @foreach (var book in Model.booksCheckedOuts)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <img src="@Url.Action("GetImage", "Book", new { id = book.Book.Id })" class="card-img-top" style="height: 150px; object-fit: cover;" />
+                                <div class="card-body">
+                                    <p>@book.Book.Title</p>
+                                    <label for="DueDate_@book.Id">Due Date</label>
+                                    <input type="date" name="DueDates[@book.Id]" id="DueDate_@book.Id" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
+                <a href="/booking/CancelCheckOut/@Model.Id" class="btn btn-danger">Decline</a>
+            </form>
+        </div>
+    </div>
+</div>
